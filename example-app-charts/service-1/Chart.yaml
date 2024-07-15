@@ -1,0 +1,12 @@
+---
+apiVersion: v2
+name: app1
+description: Chart for app1
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+
+dependencies:
+  - name: base-helm-chart
+    version: "~0.1"
+    repository: ${someHelmRegistry}

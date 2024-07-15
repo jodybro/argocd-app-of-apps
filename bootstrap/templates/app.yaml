@@ -1,0 +1,48 @@
+{{- /* LOOP (for each project, loop on apps) */}}
+{{- range $appName, $appValue := .Values.apps  }}
+
+{{- /*  app's target revision is main by default */}}
+{{- $targetRevision := default "main" $appValue.targetRevision }}
+
+
+{{- /*  app's namespace is default by ... default */}}
+{{- $appNamespace := default "default" $appValue.namespace }}
+
+---
+apiVersion: argoproj.io/v1alpha1
+
+kind: Application
+metadata:
+    annotations: {}
+    name: {{ $appName }}
+    namespace: {{ $.Values.defaultNamespace }}
+spec:
+    project: default
+    source:
+        repoURL: {{ $.Values.repository }}
+        path: "{{ $appValue.path }}"
+        helm:
+            releaseName: {{ $appValue.releaseName }}
+            valueFiles:
+                - values.yaml
+        targetRevision: {{ $targetRevision }}
+    destination:
+        server: {{ $.Values.defaultCluster }}
+        namespace: {{ $appNamespace }}
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: false
+            allowEmpty: true
+        syncOptions:
+        - CreateNamespace=true
+        - PrunePropagationPolicy=foreground
+        - PruneLast=true
+        retry:
+            limit: 2
+            backoff:
+              duration: 5s
+              factor: 2
+              maxDuration: 3m0s
+{{- end  }}{{- /*  from app loop */}}
+

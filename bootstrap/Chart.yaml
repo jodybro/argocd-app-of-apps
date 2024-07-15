@@ -1,0 +1,7 @@
+---
+- name: Bootstrap
+  apiVersion: v2
+  description: Creates an ArgoCD app that deploys all downstream apps
+  appVersion: 0.1.0
+  version: 0.1.0
+  type: application

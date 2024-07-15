@@ -1,0 +1,29 @@
+---
+# Global values
+global:
+  someKey: someValue
+  someKey2: someValue2
+  someKey3: someValue3
+
+apps:
+  app1:
+    name: app1
+    releaseName: app1
+    enabled: true
+    path: apps/app1
+    namespace: app1
+    version: 1.0.0
+  app2:
+    name: app2
+    releaseName: app2
+    enabled: true
+    path: apps/app2
+    namespace: app2
+    version: 1.0.0
+  app3:
+    name: app3
+    releaseName: app3
+    enabled: true
+    app3: apps/app3
+    namespace: app3
+    version: 1.0.0

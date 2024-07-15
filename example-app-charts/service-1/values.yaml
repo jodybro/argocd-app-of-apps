@@ -1,0 +1,16 @@
+---
+base-helm-chart:
+  base-helm-chart:
+    someKey: someValue
+    someKey2: someValue2
+    
+    service:
+      type: ClusterIP || LoadBalancer || NodePort
+      enabled: true
+    ingress:
+      enabled: true || false
+    deployment:
+      enabled: true || false
+    ## Keep repeating for each type of resource that an app at your org could use
+    ## Of course there will be resources that are mandatory...those you just dont even
+    ## give the option of turning off.
